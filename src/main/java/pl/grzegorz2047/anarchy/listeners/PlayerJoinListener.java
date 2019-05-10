@@ -20,10 +20,24 @@ public class PlayerJoinListener implements Listener {
             Location startingLocation = RandomLocation.getStartingLocation(player.getWorld(), 5000, 250, 5000);
             generateStartingSurface(player, startingLocation, 3);
             player.teleport(startingLocation);
-            PlayerInventory inventory = player.getInventory();
-            inventory.setChestplate(new ItemStack(Material.ELYTRA, 1));
-
+            prepareStartingInventory(player);
+            showTitle(player);
         }
+    }
+
+    private void prepareStartingInventory(Player player) {
+        PlayerInventory inventory = player.getInventory();
+        inventory.setChestplate(new ItemStack(Material.ELYTRA, 1));
+        ItemStack stackOfLeaves = new ItemStack(Material.JUNGLE_LEAVES, 64);
+        inventory.addItem(stackOfLeaves);
+        inventory.addItem(stackOfLeaves);
+    }
+
+    private void showTitle(Player player) {
+        int fadeIn = 10;
+        int stay = 8 * 20;
+        int fadeOut = 20;
+        player.sendTitle("Poleć gdzie chcesz", "Przetrwaj!", fadeIn, stay, fadeOut);
     }
 
     private void generateStartingSurface(Player player, Location startingLocation, int radius) {
