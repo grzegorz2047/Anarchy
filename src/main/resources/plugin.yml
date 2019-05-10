@@ -1,0 +1,4 @@
+name: Anarchy
+version: 0.0.1
+main: pl.grzegorz2047.anarchy.Anarchy
+api-version: 1.13
