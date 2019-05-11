@@ -4,8 +4,12 @@ import org.bukkit.Bukkit;
 import org.bukkit.plugin.PluginManager;
 import org.bukkit.plugin.java.JavaPlugin;
 import pl.grzegorz2047.anarchy.listeners.PlayerJoinListener;
+import pl.grzegorz2047.anarchy.listeners.PlayerRespawn;
 
 public class Anarchy extends JavaPlugin {
+
+    private AnarchyGuide anarchyGuide = new AnarchyGuide();
+
 
     @Override
     public void onEnable() {
@@ -15,7 +19,8 @@ public class Anarchy extends JavaPlugin {
 
     private void registerEvents() {
         PluginManager pluginManager = Bukkit.getPluginManager();
-        pluginManager.registerEvents(new PlayerJoinListener(), this);
+        pluginManager.registerEvents(new PlayerJoinListener(anarchyGuide), this);
+        pluginManager.registerEvents(new PlayerRespawn(anarchyGuide), this);
     }
 
     @Override
