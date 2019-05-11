@@ -15,6 +15,6 @@ public class PlayerRespawn implements Listener {
 
     @EventHandler
     void onRespawn(PlayerRespawnEvent event) {
-
+        anarchyGuide.restartStory(event);
     }
 }

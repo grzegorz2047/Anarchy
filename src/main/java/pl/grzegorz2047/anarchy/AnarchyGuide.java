@@ -4,6 +4,7 @@ import org.bukkit.Location;
 import org.bukkit.Material;
 import org.bukkit.block.Block;
 import org.bukkit.entity.Player;
+import org.bukkit.event.player.PlayerRespawnEvent;
 import org.bukkit.inventory.ItemStack;
 import org.bukkit.inventory.PlayerInventory;
 import pl.grzegorz2047.anarchy.generator.RandomLocation;
@@ -33,7 +34,7 @@ public class AnarchyGuide {
         int fadeIn = 10;
         int stay = 8 * 20;
         int fadeOut = 20;
-        player.sendTitle("Poleć gdzie chcesz", "Przetrwaj!", fadeIn, stay, fadeOut);
+        player.sendTitle("Poleć gdzie chcesz...", "Przetrwaj!", fadeIn, stay, fadeOut);
     }
 
     private void generateStartingSurface(Player player, Location startingLocation, int radius) {
@@ -49,5 +50,14 @@ public class AnarchyGuide {
             }
         }
 
+    }
+
+    public void restartStory(PlayerRespawnEvent event) {
+        Player player = event.getPlayer();
+        Location startingLocation = RandomLocation.getStartingLocation(player.getWorld(), 5000, 260, 5000);
+        this.generateStartingSurface(player, startingLocation, 3);
+        event.setRespawnLocation(startingLocation);
+        this.prepareStartingInventory(player);
+        this.showTitle(player);
     }
 }
