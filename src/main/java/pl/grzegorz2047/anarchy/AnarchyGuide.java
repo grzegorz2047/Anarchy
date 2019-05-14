@@ -1,24 +1,40 @@
 package pl.grzegorz2047.anarchy;
 
+import org.bukkit.ChatColor;
 import org.bukkit.Location;
 import org.bukkit.Material;
+import org.bukkit.World;
 import org.bukkit.block.Block;
 import org.bukkit.entity.Player;
 import org.bukkit.event.player.PlayerRespawnEvent;
 import org.bukkit.inventory.ItemStack;
 import org.bukkit.inventory.PlayerInventory;
+import pl.grzegorz2047.anarchy.chat.ChatFormatter;
 import pl.grzegorz2047.anarchy.generator.RandomLocation;
-import pl.grzegorz2047.anarchy.listeners.PlayerJoinListener;
 
 public class AnarchyGuide {
 
 
     public void startNewStory(Player player) {
-        Location startingLocation = RandomLocation.getStartingLocation(player.getWorld(), 5000, 250, 5000);
-        this.generateStartingSurface(player, startingLocation, 3);
+        Location startingLocation = prepareSpawn(player);
+        this.prepareStartingInventory(player);
         player.teleport(startingLocation);
+        this.showTitle(player);
+        player.sendMessage(ChatFormatter.formatChat(ChatColor.GRAY, "Użyj elytry, aby wylądować bepiecznie i rozpocząć nową historię!"));
+    }
+
+    public void restartStory(PlayerRespawnEvent event) {
+        Player player = event.getPlayer();
+        Location startingLocation = prepareSpawn(player);
         this.prepareStartingInventory(player);
         this.showTitle(player);
+        event.setRespawnLocation(startingLocation);
+    }
+
+    private Location prepareSpawn(Player player) {
+        Location startingLocation = RandomLocation.getStartingLocation(player.getWorld(), 5000, 250, 5000);
+        this.generateStartingSurface(startingLocation, 3);
+        return startingLocation;
     }
 
 
@@ -37,27 +53,21 @@ public class AnarchyGuide {
         player.sendTitle("Poleć gdzie chcesz...", "Przetrwaj!", fadeIn, stay, fadeOut);
     }
 
-    private void generateStartingSurface(Player player, Location startingLocation, int radius) {
+    private void generateStartingSurface(Location startingLocation, int radius) {
         Location blockLocation = startingLocation.clone();
-        blockLocation.setY(blockLocation.getBlockY() - 1);
+        blockLocation.setY(blockLocation.getBlockY() - 2);
         int blockX = blockLocation.getBlockX();
         int blockY = blockLocation.getBlockY();
         int blockZ = blockLocation.getBlockZ();
+        World world = blockLocation.getWorld();
         for (int x = blockX - radius; x < blockX + radius; x++) {
             for (int z = blockZ - radius; z < blockZ + radius; z++) {
-                Block spawnBlock = player.getWorld().getBlockAt(x, blockY, z);
+                Block spawnBlock = world.getBlockAt(x, blockY, z);
                 spawnBlock.setType(Material.ACACIA_LEAVES);
             }
         }
 
     }
 
-    public void restartStory(PlayerRespawnEvent event) {
-        Player player = event.getPlayer();
-        Location startingLocation = RandomLocation.getStartingLocation(player.getWorld(), 5000, 260, 5000);
-        this.generateStartingSurface(player, startingLocation, 3);
-        event.setRespawnLocation(startingLocation);
-        this.prepareStartingInventory(player);
-        this.showTitle(player);
-    }
+
 }
