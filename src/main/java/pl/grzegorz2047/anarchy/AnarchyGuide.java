@@ -12,11 +12,11 @@ import org.bukkit.inventory.PlayerInventory;
 import pl.grzegorz2047.anarchy.chat.ChatFormatter;
 import pl.grzegorz2047.anarchy.generator.RandomLocation;
 
-import java.util.Arrays;
-import java.util.Properties;
+import java.util.*;
 
 public class AnarchyGuide {
     private final Properties properties;
+    private List<UUID> respawnMark = new ArrayList<>();
 
     public AnarchyGuide(Properties prop) {
         this.properties = prop;
@@ -27,7 +27,7 @@ public class AnarchyGuide {
         return Boolean.parseBoolean(properties.getProperty("isForCrackersow"));
     }
 
-    public void startNewStory(Player player) {
+    private void startNewStory(Player player) {
         Location startingLocation = prepareSpawn(player);
         this.prepareStartingInventory(player);
         player.teleport(startingLocation);
@@ -88,4 +88,14 @@ public class AnarchyGuide {
     }
 
 
+    public void serveKrakerRespawn(Player player) {
+        boolean removed = this.respawnMark.remove(player.getUniqueId());
+        if (removed) {
+            this.startNewStory(player);
+        }
+    }
+
+    public void markToRespawn(Player player) {
+        this.respawnMark.add(player.getUniqueId());
+    }
 }
