@@ -19,28 +19,26 @@ public class Anarchy extends JavaPlugin {
 
     private AnarchyGuide anarchyGuide;
 
-
     @Override
     public void onEnable() {
         try {
-            registerEvents();
+            String pluginFolderUrl = this.getDataFolder().getAbsolutePath() + File.separator;
+            Properties prop = loadProperties(pluginFolderUrl);
+            anarchyGuide = new AnarchyGuide(prop);
         } catch (CantLoadProperties cantLoadProperties) {
             getLogger().log(Level.SEVERE, "Anarchy couldn't start!");
             throw new RuntimeException();
         }
+
+        registerEvents();
         getLogger().info("Anarchy was enabled!");
     }
 
-    private void registerEvents() throws CantLoadProperties {
-        String pluginFolderUrl = this.getDataFolder().getAbsolutePath() + File.separator;
-        Properties prop = loadProperties(pluginFolderUrl);
-        anarchyGuide = new AnarchyGuide(prop);
+    private void registerEvents() {
         PluginManager pluginManager = Bukkit.getPluginManager();
-        if(anarchyGuide.isForCrackersons()){
-            System.out.println("Dla krakersow");
+        if (anarchyGuide.isForCrackersons()) {
             pluginManager.registerEvents(new AuthMeLogin(anarchyGuide), this);
         } else {
-            System.out.println("Dla normalnych");
             pluginManager.registerEvents(new PlayerJoinListener(anarchyGuide), this);
         }
         pluginManager.registerEvents(new PlayerRespawn(anarchyGuide), this);

@@ -23,7 +23,6 @@ public class AnarchyGuide {
     }
 
     public boolean isForCrackersons() {
-        System.out.println(Arrays.toString(properties.values().toArray()));
         return Boolean.parseBoolean(properties.getProperty("isForCrackersow"));
     }
 
@@ -44,7 +43,7 @@ public class AnarchyGuide {
     }
 
     private Location prepareSpawn(Player player) {
-        Location startingLocation = RandomLocation.getStartingLocation(player.getWorld(), 5000, 250, 5000);
+        Location startingLocation = RandomLocation.getStartingLocation(player.getWorld(), getStartingLocationRange(), getStartingLocationHeight(), getStartingLocationRange());
         this.generateStartingSurface(startingLocation, 3);
         return startingLocation;
     }
@@ -97,5 +96,13 @@ public class AnarchyGuide {
 
     public void markToRespawn(Player player) {
         this.respawnMark.add(player.getUniqueId());
+    }
+
+    public int getStartingLocationRange() {
+        return Integer.parseInt(properties.getProperty("startingLocationRange"));
+    }
+
+    public int getStartingLocationHeight() {
+        return Integer.parseInt(properties.getProperty("startingLocationHeight"));
     }
 }
