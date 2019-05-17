@@ -23,10 +23,10 @@ public class PlayerJoinListener implements Listener {
     @EventHandler
     public void onJoin(PlayerJoinEvent e) {
         Player player = e.getPlayer();
-        if (!player.hasPlayedBefore()) {
-            anarchyGuide.startNewStory(player);
-        }
+        anarchyGuide.serveFirstTimePlayers(player);
+        System.out.println("joinEvent");
     }
+
 
 
 }
