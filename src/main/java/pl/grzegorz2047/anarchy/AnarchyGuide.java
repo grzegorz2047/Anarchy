@@ -1,9 +1,6 @@
 package pl.grzegorz2047.anarchy;
 
-import org.bukkit.ChatColor;
-import org.bukkit.Location;
-import org.bukkit.Material;
-import org.bukkit.World;
+import org.bukkit.*;
 import org.bukkit.block.Block;
 import org.bukkit.entity.Player;
 import org.bukkit.event.player.PlayerRespawnEvent;
@@ -27,23 +24,28 @@ public class AnarchyGuide {
     }
 
     private void startNewStory(Player player) {
-        Location startingLocation = prepareSpawn(player);
+        Location startingLocation = prepareSpawn();
         this.prepareStartingInventory(player);
         player.teleport(startingLocation);
         this.showTitle(player);
+        sendStartingMessage(player);
+    }
+
+    private void sendStartingMessage(Player player) {
         player.sendMessage(ChatFormatter.formatChat(ChatColor.GRAY, "Użyj elytry, aby wylądować bepiecznie i rozpocząć nową historię!"));
     }
 
     public void restartStory(PlayerRespawnEvent event) {
         Player player = event.getPlayer();
-        Location startingLocation = prepareSpawn(player);
+        Location startingLocation = prepareSpawn();
         this.prepareStartingInventory(player);
         this.showTitle(player);
+        sendStartingMessage(player);
         event.setRespawnLocation(startingLocation);
     }
 
-    private Location prepareSpawn(Player player) {
-        Location startingLocation = RandomLocation.getStartingLocation(player.getWorld(), getStartingLocationRange(), getStartingLocationHeight(), getStartingLocationRange());
+    private Location prepareSpawn() {
+        Location startingLocation = RandomLocation.getStartingLocation(Bukkit.getWorlds().get(0), getStartingLocationRange(), getStartingLocationHeight(), getStartingLocationRange());
         this.generateStartingSurface(startingLocation, 3);
         return startingLocation;
     }
@@ -72,9 +74,11 @@ public class AnarchyGuide {
         int blockZ = blockLocation.getBlockZ();
         World world = blockLocation.getWorld();
         for (int x = blockX - radius; x < blockX + radius; x++) {
-            for (int z = blockZ - radius; z < blockZ + radius; z++) {
-                Block spawnBlock = world.getBlockAt(x, blockY, z);
-                spawnBlock.setType(Material.ACACIA_LEAVES);
+            for (int y = blockY - 1; y < blockY + 1; y++) {
+                for (int z = blockZ - radius; z < blockZ + radius; z++) {
+                    Block spawnBlock = world.getBlockAt(x, y, z);
+                    spawnBlock.setType(Material.ACACIA_LEAVES);
+                }
             }
         }
 
