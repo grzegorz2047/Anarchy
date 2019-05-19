@@ -24,6 +24,7 @@ public class PlayerJoinListener implements Listener {
     public void onJoin(PlayerJoinEvent e) {
         Player player = e.getPlayer();
         anarchyGuide.serveFirstTimePlayers(player);
+        anarchyGuide.configurePlayer(player);
         System.out.println("joinEvent");
     }
 

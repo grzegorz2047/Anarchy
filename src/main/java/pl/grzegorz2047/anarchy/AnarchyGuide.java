@@ -8,12 +8,14 @@ import org.bukkit.inventory.ItemStack;
 import org.bukkit.inventory.PlayerInventory;
 import pl.grzegorz2047.anarchy.chat.ChatFormatter;
 import pl.grzegorz2047.anarchy.generator.RandomLocation;
+import pl.grzegorz2047.anarchy.scoreboard.ScoreboardSidebar;
 
 import java.util.*;
 
 public class AnarchyGuide {
     private final Properties properties;
     private List<UUID> respawnMark = new ArrayList<>();
+    private ScoreboardSidebar scoreboard = new ScoreboardSidebar();
 
     public AnarchyGuide(Properties prop) {
         this.properties = prop;
@@ -108,5 +110,10 @@ public class AnarchyGuide {
 
     public int getStartingLocationHeight() {
         return Integer.parseInt(properties.getProperty("startingLocationHeight"));
+    }
+
+    public void configurePlayer(Player player) {
+        scoreboard.addWholeScoreboard(player);
+        scoreboard.addHealthbar(player, player.getScoreboard());
     }
 }

@@ -23,5 +23,6 @@ public class AuthMeLogin implements Listener {
         anarchyGuide.serveKrakerRespawn(player);
         anarchyGuide.serveFirstTimePlayers(player);
         System.out.println("loginEvent");
-}
+        anarchyGuide.configurePlayer(player);
+    }
 }
