@@ -10,10 +10,10 @@ public class ScoreboardSidebar {
         String label = ChatColor.translateAlternateColorCodes('&', "&eKille");
         Objective objective = scoreboard.registerNewObjective("stats", "dummy", label);
         objective.setDisplaySlot(DisplaySlot.SIDEBAR);
-        objective.setDisplayName("§6§l *** Anarchy ***");
-        addLineToScoreboard(objective, "kille: 69", 9);
-        addLineToScoreboard(objective, "deady: 777", 8);
-        addLineToScoreboard(objective, "aha.fajnyserw.pl", 7);
+        objective.setDisplayName("§6§l     Anarchy    ");
+        addLineToScoreboard(objective, "§7kille:§b 69", 2);
+        addLineToScoreboard(objective, "§7deady:§b 777", 1);
+        addLineToScoreboard(objective, "§6aha.fajnyserw.pl", 0);
     }
 
     private void addLineToScoreboard(Objective objective, String data, int position) {

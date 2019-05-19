@@ -114,6 +114,5 @@ public class AnarchyGuide {
 
     public void configurePlayer(Player player) {
         scoreboard.addWholeScoreboard(player);
-        scoreboard.addHealthbar(player, player.getScoreboard());
     }
 }
