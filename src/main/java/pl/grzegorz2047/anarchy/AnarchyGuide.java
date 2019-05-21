@@ -56,7 +56,7 @@ public class AnarchyGuide {
     private void prepareStartingInventory(Player player) {
         PlayerInventory inventory = player.getInventory();
         inventory.setChestplate(new ItemStack(Material.ELYTRA, 1));
-        ItemStack stackOfLeaves = new ItemStack(Material.JUNGLE_LEAVES, 64);
+        ItemStack stackOfLeaves = new ItemStack(Material.OAK_LEAVES, 64);
         inventory.addItem(stackOfLeaves);
         inventory.addItem(stackOfLeaves);
     }
@@ -79,7 +79,7 @@ public class AnarchyGuide {
             for (int y = blockY - 1; y < blockY + 1; y++) {
                 for (int z = blockZ - radius; z < blockZ + radius; z++) {
                     Block spawnBlock = world.getBlockAt(x, y, z);
-                    spawnBlock.setType(Material.ACACIA_LEAVES);
+                    spawnBlock.setType(Material.OAK_LEAVES);
                 }
             }
         }
