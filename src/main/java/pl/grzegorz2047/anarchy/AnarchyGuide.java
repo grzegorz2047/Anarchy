@@ -4,8 +4,11 @@ import org.bukkit.*;
 import org.bukkit.block.Block;
 import org.bukkit.entity.Player;
 import org.bukkit.event.player.PlayerRespawnEvent;
+import org.bukkit.inventory.ItemFactory;
 import org.bukkit.inventory.ItemStack;
 import org.bukkit.inventory.PlayerInventory;
+import org.bukkit.inventory.meta.BookMeta;
+import org.bukkit.inventory.meta.ItemMeta;
 import pl.grzegorz2047.anarchy.chat.ChatFormatter;
 import pl.grzegorz2047.anarchy.generator.RandomLocation;
 import pl.grzegorz2047.anarchy.scoreboard.ScoreboardSidebar;
@@ -56,9 +59,12 @@ public class AnarchyGuide {
     private void prepareStartingInventory(Player player) {
         PlayerInventory inventory = player.getInventory();
         inventory.setChestplate(new ItemStack(Material.ELYTRA, 1));
-        ItemStack stackOfLeaves = new ItemStack(Material.OAK_LEAVES, 64);
-        inventory.addItem(stackOfLeaves);
-        inventory.addItem(stackOfLeaves);
+        ItemStack itemStack = new ItemStack(Material.WRITTEN_BOOK);
+        BookMeta itemMeta = (BookMeta) itemStack.getItemMeta();
+        itemMeta.setTitle("Ja nie nuubić startu?");
+        itemMeta.addPage("Najpierw użyj normalnie elytry.\n\nPotem wypadałoby nie upaść na twarz.\n\nPrzetrwaj lub schroń się na coordach -160, 64, -330");
+        itemStack.setItemMeta(itemMeta);
+        inventory.setItem(0, itemStack);
     }
 
     private void showTitle(Player player) {
@@ -114,5 +120,10 @@ public class AnarchyGuide {
 
     public void configurePlayer(Player player) {
         scoreboard.addWholeScoreboard(player);
+    }
+
+    public boolean useAnarchyChatHandler() {
+        return Boolean.parseBoolean(properties.getProperty("useAnarchyChatHandler"));
+
     }
 }

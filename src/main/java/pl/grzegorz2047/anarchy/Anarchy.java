@@ -5,6 +5,7 @@ import org.bukkit.plugin.PluginManager;
 import org.bukkit.plugin.java.JavaPlugin;
 import pl.grzegorz2047.anarchy.exceptions.CantLoadProperties;
 import pl.grzegorz2047.anarchy.listeners.AuthMeLogin;
+import pl.grzegorz2047.anarchy.listeners.PlayerChat;
 import pl.grzegorz2047.anarchy.listeners.PlayerJoinListener;
 import pl.grzegorz2047.anarchy.listeners.PlayerRespawn;
 
@@ -42,6 +43,9 @@ public class Anarchy extends JavaPlugin {
             pluginManager.registerEvents(new PlayerJoinListener(anarchyGuide), this);
         }
         pluginManager.registerEvents(new PlayerRespawn(anarchyGuide), this);
+        if(anarchyGuide.useAnarchyChatHandler()){
+            pluginManager.registerEvents(new PlayerChat(anarchyGuide), this);
+        }
     }
 
     private Properties loadProperties(String pluginFolderUrl) throws CantLoadProperties {
