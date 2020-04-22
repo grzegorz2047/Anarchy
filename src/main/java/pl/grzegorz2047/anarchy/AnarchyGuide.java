@@ -41,12 +41,35 @@ public class AnarchyGuide {
     }
 
     public void restartStory(PlayerRespawnEvent event) {
+        Location originalRespawnLocation = event.getRespawnLocation();
         Player player = event.getPlayer();
+        if (hasBedSpawn(originalRespawnLocation, player)) return;
         Location startingLocation = prepareSpawn();
         this.prepareStartingInventory(player);
         this.showTitle(player);
         sendStartingMessage(player);
         event.setRespawnLocation(startingLocation);
+
+    }
+
+    private boolean hasBedSpawn(Location originalRespawnLocation, Player player) {
+        Location worldSpawnLocation = player.getBedSpawnLocation();
+        if(worldSpawnLocation == null) {
+            return false;
+        }
+        double originalX = originalRespawnLocation.getX();
+        double originalY = originalRespawnLocation.getY();
+        double originalZ = originalRespawnLocation.getZ();
+
+        double worldX = worldSpawnLocation.getX();
+        double worldY = worldSpawnLocation.getY();
+        double worldZ = worldSpawnLocation.getZ();
+
+        double v = originalX - worldX + originalY - worldY + originalZ - worldZ;
+        if (v < 5) {
+            return true;
+        }
+        return false;
     }
 
     private Location prepareSpawn() {
@@ -59,12 +82,18 @@ public class AnarchyGuide {
     private void prepareStartingInventory(Player player) {
         PlayerInventory inventory = player.getInventory();
         inventory.setChestplate(new ItemStack(Material.ELYTRA, 1));
+        ItemStack itemStack = createBook();
+        inventory.setItem(0, itemStack);
+    }
+
+    private ItemStack createBook() {
         ItemStack itemStack = new ItemStack(Material.WRITTEN_BOOK);
         BookMeta itemMeta = (BookMeta) itemStack.getItemMeta();
+        itemMeta.setLore(new ArrayList<>());
         itemMeta.setTitle("Ja nie nuubić startu?");
         itemMeta.addPage("Najpierw użyj normalnie elytry.\n\nPotem wypadałoby nie upaść na twarz.\n\nPrzetrwaj lub schroń się na coordach -160, 64, -330");
         itemStack.setItemMeta(itemMeta);
-        inventory.setItem(0, itemStack);
+        return itemStack;
     }
 
     private void showTitle(Player player) {
