@@ -90,6 +90,8 @@ public class AnarchyGuide {
         ItemStack itemStack = new ItemStack(Material.WRITTEN_BOOK);
         BookMeta itemMeta = (BookMeta) itemStack.getItemMeta();
         itemMeta.setLore(new ArrayList<>());
+        itemMeta.setAuthor("Grzegorz <3");
+        itemMeta.setGeneration(BookMeta.Generation.ORIGINAL);
         itemMeta.setTitle("Ja nie nuubić startu?");
         itemMeta.addPage("Najpierw użyj normalnie elytry.\n\nPotem wypadałoby nie upaść na twarz.\n\nPrzetrwaj lub schroń się na coordach -160, 64, -330");
         itemStack.setItemMeta(itemMeta);
