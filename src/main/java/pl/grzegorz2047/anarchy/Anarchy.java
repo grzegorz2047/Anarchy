@@ -58,6 +58,7 @@ public class Anarchy extends JavaPlugin {
         pluginManager.registerEvents(new PlayerRespawn(anarchyGuide), this);
         pluginManager.registerEvents(new PlayerDeath(anarchyGuide), this);
         pluginManager.registerEvents(new PlayerPvpInteraction(anarchyGuide, antiLogout), this);
+        pluginManager.registerEvents(new PlayerQuit(antiLogout), this);
         if (anarchyGuide.useAnarchyChatHandler()) {
             pluginManager.registerEvents(new PlayerChat(anarchyGuide), this);
         }

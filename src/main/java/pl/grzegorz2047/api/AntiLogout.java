@@ -2,6 +2,7 @@ package pl.grzegorz2047.api;
 
 import org.bukkit.Bukkit;
 import org.bukkit.entity.Player;
+import org.bukkit.inventory.ItemStack;
 import pl.grzegorz2047.api.antilogout.Fight;
 
 import java.util.*;
@@ -95,5 +96,26 @@ public class AntiLogout {
         return fightList.containsKey(name);
     }
 
+    public void handleLogout(Player player) {
+        String playerName = player.getName();
+        if (isPlayerDuringFight(playerName)) {
+            Player potentialKiller = Bukkit.getPlayer(getPotentialKillerName(playerName));
+            player.damage(400, potentialKiller);
+            player.getInventory().clear();
+            player.getInventory().setArmorContents(new ItemStack[4]);
+            removePlayerFromFight(playerName);
+            /*if (potentialKiller != null) {
+            }*/
+            Bukkit.broadcastMessage(this.messages.get("anarchy.fight.leftDuringFight").replace("%PLAYER%", playerName));
+        }
+    }
+
+    public void removePlayerFromFight(String playerName) {
+        this.fightList.remove(playerName);
+    }
+
+    private String getPotentialKillerName(String victim) {
+        return this.fightList.get(victim).getFirstOpponent();
+    }
 }
 
