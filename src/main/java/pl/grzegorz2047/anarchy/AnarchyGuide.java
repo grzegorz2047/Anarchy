@@ -4,24 +4,26 @@ import org.bukkit.*;
 import org.bukkit.block.Block;
 import org.bukkit.entity.Player;
 import org.bukkit.event.player.PlayerRespawnEvent;
-import org.bukkit.inventory.ItemFactory;
 import org.bukkit.inventory.ItemStack;
 import org.bukkit.inventory.PlayerInventory;
 import org.bukkit.inventory.meta.BookMeta;
-import org.bukkit.inventory.meta.ItemMeta;
 import pl.grzegorz2047.anarchy.chat.ChatFormatter;
-import pl.grzegorz2047.anarchy.generator.RandomLocation;
+import pl.grzegorz2047.api.Messages;
+import pl.grzegorz2047.api.generator.RandomLocation;
 import pl.grzegorz2047.anarchy.scoreboard.ScoreboardSidebar;
 
 import java.util.*;
 
 public class AnarchyGuide {
     private final Properties properties;
+    private final Messages messages;
+
     private List<UUID> respawnMark = new ArrayList<>();
     private ScoreboardSidebar scoreboard = new ScoreboardSidebar();
 
-    public AnarchyGuide(Properties prop) {
+    public AnarchyGuide(Properties prop, Messages messages) {
         this.properties = prop;
+        this.messages = messages;
     }
 
     public boolean isForCrackersons() {
@@ -37,7 +39,7 @@ public class AnarchyGuide {
     }
 
     private void sendStartingMessage(Player player) {
-        player.sendMessage(ChatFormatter.formatChat(ChatColor.GRAY, "Użyj elytry, aby wylądować bepiecznie i rozpocząć nową historię!"));
+        player.sendMessage(messages.get("anarchy.gettingStarted"));
     }
 
     public void restartStory(PlayerRespawnEvent event) {
@@ -66,10 +68,7 @@ public class AnarchyGuide {
         double worldZ = worldSpawnLocation.getZ();
 
         double v = originalX - worldX + originalY - worldY + originalZ - worldZ;
-        if (v < 5) {
-            return true;
-        }
-        return false;
+        return v < 5;
     }
 
     private Location prepareSpawn() {

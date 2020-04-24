@@ -1,4 +1,4 @@
-package pl.grzegorz2047.anarchy.generator;
+package pl.grzegorz2047.api.generator;
 
 import org.bukkit.Location;
 import org.bukkit.World;
