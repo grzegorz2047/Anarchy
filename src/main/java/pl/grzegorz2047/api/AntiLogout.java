@@ -83,8 +83,7 @@ public class AntiLogout {
 
     public void sendAntiLogoutMessage(Player firstOpponent, Fight fight) {
         long secCalculate = (fight.getEndCooldown() - System.currentTimeMillis()) / 1000;
-        System.out.println(secCalculate + " secCalculate");
-        ActionBar.sendActionBar(firstOpponent, antiLogoutBarGenerator.generateActionBarAntilogout(secCalculate));
+         ActionBar.sendActionBar(firstOpponent, antiLogoutBarGenerator.generateActionBarAntilogout(secCalculate));
     }
 
     public void sendAntiLogoutMessage(Player firstOpponent, Player secondOpponent, Fight fight) {

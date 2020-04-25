@@ -13,9 +13,7 @@ public class AntiLogoutBarGenerator {
             return out.toString();
         }
         float val = (float) time / (float) Fight.COOLDOWN;
-        System.out.println(val + " val");
         float perc = val * 100;
-        System.out.println(perc + " perc");
         out.append(makeHealthString(perc));
         out.append("§e ").append(time).append(" §6sec.");
         return out.toString();
@@ -30,7 +28,6 @@ public class AntiLogoutBarGenerator {
         }
 
         int splitPosition = ((int) perc / 10) % 10;
-        System.out.println(splitPosition + " split position");
 
         String partBar = defaultAntiLogoutBar.substring(0, splitPosition) + splitColor;
         String finalBar = partBar + defaultAntiLogoutBar.substring(splitPosition);

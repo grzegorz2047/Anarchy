@@ -19,6 +19,7 @@ public class PlayerDeath implements Listener {
     private void onPlayerDie(PlayerDeathEvent event) {
         Player playerKilled = event.getEntity();
         Player killer = playerKilled.getKiller();
+        System.out.println("killed " + playerKilled + "killer " + killer);
         this.antiLogout.clearFight(playerKilled, killer);
         //this.dbQuery.addDeathCount(playerKilled);
         //this.dbQuery.addKillCount(killer);
