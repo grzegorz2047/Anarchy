@@ -129,3 +129,15 @@ gradle-app.setting
 **/build/
 
 # End of https://www.gitignore.io/api/java,gradle,intellij
+/.idea/compiler.xml
+/target/classes/config.yml
+/target/maven-status/maven-compiler-plugin/compile/default-compile/createdFiles.lst
+/target/maven-status/maven-compiler-plugin/testCompile/default-testCompile/createdFiles.lst
+/target/maven-status/maven-compiler-plugin/compile/default-compile/inputFiles.lst
+/target/maven-status/maven-compiler-plugin/testCompile/default-testCompile/inputFiles.lst
+/.idea/jarRepositories.xml
+/target/classes/messages_pl.properties
+/target/classes/plugin.properties
+/target/classes/plugin.yml
+/target/maven-archiver/pom.properties
+/.idea/vcs.xml
