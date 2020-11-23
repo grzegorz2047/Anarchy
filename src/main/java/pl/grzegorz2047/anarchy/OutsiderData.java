@@ -2,13 +2,13 @@ package pl.grzegorz2047.anarchy;
 
 public class OutsiderData {
 
-    private final long swimOutOfWaterTime;
+    private final long timeWhenPlayerGotOutOfWater;
     private final boolean isFirstTime;
     private long timeOustideWater;
     private long MAX_OUTSIDE_WATER_TIME = 30 * 1000;
 
     public OutsiderData(long swimOutWaterTime, boolean isFirstTime) {
-        this.swimOutOfWaterTime = swimOutWaterTime;
+        this.timeWhenPlayerGotOutOfWater = swimOutWaterTime;
         this.isFirstTime = isFirstTime;
         if(isFirstTime) {
             MAX_OUTSIDE_WATER_TIME = 60 * 1000;
@@ -20,13 +20,13 @@ public class OutsiderData {
     }
 
     public boolean isOutOfAir() {
-        return timeOustideWater - swimOutOfWaterTime > MAX_OUTSIDE_WATER_TIME;
+        return timeOustideWater - timeWhenPlayerGotOutOfWater > MAX_OUTSIDE_WATER_TIME;
     }
 
     public long getRemainingTime() {
-        long l = (timeOustideWater + MAX_OUTSIDE_WATER_TIME) - swimOutOfWaterTime;
-        if (l >= 0) {
-            return l;
+        long diff = (timeWhenPlayerGotOutOfWater + MAX_OUTSIDE_WATER_TIME) - timeOustideWater;
+        if (diff >= 0) {
+            return diff;
         } else {
             return 0;
         }

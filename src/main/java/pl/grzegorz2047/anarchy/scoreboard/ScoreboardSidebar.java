@@ -7,7 +7,7 @@ import org.bukkit.scoreboard.*;
 
 public class ScoreboardSidebar {
 
-    private String airLabel = "§c§l❤";
+    private String airLabel = "§1§l⬤  ";
 
     private void addSidebar(Scoreboard scoreboard) {
         String label = ChatColor.translateAlternateColorCodes('&', "&eKille");
@@ -17,7 +17,7 @@ public class ScoreboardSidebar {
         addLineToScoreboard(objective, "§7kille:§b 69", 2);
         addLineToScoreboard(objective, "§7deady:§b 777", 1);
         addLineToScoreboard(objective, "§6aha.fajnyserw.pl", 0);
-        addEntry(scoreboard, objective, airLabel, String.valueOf(20), -1);
+        addEntry(scoreboard, objective, airLabel, String.valueOf(30), -1);
     }
 
     private void addLineToScoreboard(Objective objective, String data, int position) {
@@ -55,7 +55,7 @@ public class ScoreboardSidebar {
 
     public Team addEntry(Scoreboard scoreboard, Objective objective, String name, String value, int position) {
         Team t = scoreboard.registerNewTeam(name);
-        t.setPrefix(" §b⬤  ");
+        t.setPrefix("");
         //t.setPrefix(" §0∙ ");
         t.addEntry(name);
         t.setSuffix(value);
