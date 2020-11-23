@@ -58,7 +58,7 @@ public class Anarchy extends JavaPlugin {
             pluginManager.registerEvents(new PlayerJoin(anarchyGuide), this);
         }
         pluginManager.registerEvents(new PlayerRespawn(anarchyGuide, playerBreathingManager), this);
-        pluginManager.registerEvents(new PlayerDeath(anarchyGuide), this);
+        pluginManager.registerEvents(new PlayerDeath(anarchyGuide, antiLogout), this);
         pluginManager.registerEvents(new PlayerPvpInteraction(anarchyGuide, antiLogout), this);
         pluginManager.registerEvents(new PlayerQuit(antiLogout), this);
         pluginManager.registerEvents(new SafeLogin(), this);

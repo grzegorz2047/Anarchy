@@ -40,4 +40,8 @@ public class PlayerBreathingManager {
     public void respawnPlayer(Player player) {
         playerOutside.put(player.getName(), new OutsiderData(System.currentTimeMillis(), true));
     }
+
+    public void regainBreath(Player player) {
+        playerOutside.put(player.getName(), new OutsiderData(System.currentTimeMillis(), false));
+    }
 }

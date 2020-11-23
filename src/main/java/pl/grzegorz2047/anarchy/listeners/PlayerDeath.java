@@ -11,8 +11,9 @@ public class PlayerDeath implements Listener {
     private final AnarchyGuide anarchyGuide;
     private AntiLogout antiLogout;
 
-    public PlayerDeath(AnarchyGuide anarchyGuide) {
+    public PlayerDeath(AnarchyGuide anarchyGuide, AntiLogout antiLogout) {
         this.anarchyGuide = anarchyGuide;
+        this.antiLogout = antiLogout;
     }
 
     @EventHandler
