@@ -49,17 +49,21 @@ public class Anarchy extends JavaPlugin {
 
 
     private void registerEvents(AntiLogout antiLogout) {
+        PlayerBreathingManager playerBreathingManager = new PlayerBreathingManager();
+
         PluginManager pluginManager = Bukkit.getPluginManager();
         if (anarchyGuide.isForCrackersons()) {
             pluginManager.registerEvents(new AuthMeLogin(anarchyGuide), this);
         } else {
-            pluginManager.registerEvents(new PlayerJoinListener(anarchyGuide), this);
+            pluginManager.registerEvents(new PlayerJoin(anarchyGuide), this);
         }
-        pluginManager.registerEvents(new PlayerRespawn(anarchyGuide), this);
+        pluginManager.registerEvents(new PlayerRespawn(anarchyGuide, playerBreathingManager), this);
         pluginManager.registerEvents(new PlayerDeath(anarchyGuide), this);
         pluginManager.registerEvents(new PlayerPvpInteraction(anarchyGuide, antiLogout), this);
         pluginManager.registerEvents(new PlayerQuit(antiLogout), this);
         pluginManager.registerEvents(new SafeLogin(), this);
+        ;
+        pluginManager.registerEvents(new PlayerBreath(playerBreathingManager), this);
         if (anarchyGuide.useAnarchyChatHandler()) {
             pluginManager.registerEvents(new PlayerChat(anarchyGuide), this);
         }

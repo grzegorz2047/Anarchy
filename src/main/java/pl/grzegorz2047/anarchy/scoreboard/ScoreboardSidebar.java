@@ -6,6 +6,9 @@ import org.bukkit.entity.Player;
 import org.bukkit.scoreboard.*;
 
 public class ScoreboardSidebar {
+
+    private String airLabel = "§c§l❤";
+
     private void addSidebar(Scoreboard scoreboard) {
         String label = ChatColor.translateAlternateColorCodes('&', "&eKille");
         Objective objective = scoreboard.registerNewObjective("stats", "dummy", label);
@@ -14,6 +17,7 @@ public class ScoreboardSidebar {
         addLineToScoreboard(objective, "§7kille:§b 69", 2);
         addLineToScoreboard(objective, "§7deady:§b 777", 1);
         addLineToScoreboard(objective, "§6aha.fajnyserw.pl", 0);
+        addEntry(scoreboard, objective, airLabel, String.valueOf(20), -1);
     }
 
     private void addLineToScoreboard(Objective objective, String data, int position) {
@@ -35,5 +39,33 @@ public class ScoreboardSidebar {
         Scoreboard scoreboard = player.getScoreboard();
         addSidebar(scoreboard);
         addHealthbar(player, scoreboard);
+    }
+
+    public void updateBreathingTime(Player p, long remainingTime) {
+        if (remainingTime <= 0) {
+            remainingTime = 0;
+        } else {
+            remainingTime = (int) (remainingTime / 1000);
+        }
+        Scoreboard scoreboard = p.getScoreboard();
+        if (scoreboard.getTeam(airLabel) != null) {
+            updateEntry(scoreboard, airLabel, remainingTime);
+        }
+    }
+
+    public Team addEntry(Scoreboard scoreboard, Objective objective, String name, String value, int position) {
+        Team t = scoreboard.registerNewTeam(name);
+        t.setPrefix(" §b⬤  ");
+        //t.setPrefix(" §0∙ ");
+        t.addEntry(name);
+        t.setSuffix(value);
+        Score score = objective.getScore(name);
+        score.setScore(position);
+        return t;
+    }
+
+    public void updateEntry(Scoreboard scoreboard, String name, long value) {
+        Team t = scoreboard.getTeam(name);
+        t.setSuffix(" " + value);
     }
 }

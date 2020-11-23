@@ -10,9 +10,11 @@ import pl.grzegorz2047.anarchy.AnarchyGuide;
 public class PlayerRespawn implements Listener {
 
     private final AnarchyGuide anarchyGuide;
+    private final PlayerBreathingManager playerBreathingManager;
 
-    public PlayerRespawn(AnarchyGuide anarchyGuide) {
+    public PlayerRespawn(AnarchyGuide anarchyGuide, PlayerBreathingManager playerBreathingManager) {
         this.anarchyGuide = anarchyGuide;
+        this.playerBreathingManager = playerBreathingManager;
     }
 
     @EventHandler
@@ -28,5 +30,6 @@ public class PlayerRespawn implements Listener {
             }
         }
         anarchyGuide.restartStory(event);
+        playerBreathingManager.respawnPlayer(player);
     }
 }

@@ -25,7 +25,7 @@ public class SafeLogin implements Listener {
         }
     }
 
-    @EventHandler
+    /*@EventHandler
     private void onViolation(PlayerViolationEvent e) {
         Player player = e.getPlayer();
         String uuidStr = player.getUniqueId().toString();
@@ -35,7 +35,7 @@ public class SafeLogin implements Listener {
            // System.out.println("Bypass violation for " + player.getName());
             e.setCancelled(true);
         }
-    }
+    }*/
 
 
 }

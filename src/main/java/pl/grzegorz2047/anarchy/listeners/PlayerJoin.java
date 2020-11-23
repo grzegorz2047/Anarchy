@@ -11,12 +11,12 @@ import org.bukkit.inventory.ItemStack;
 import org.bukkit.inventory.PlayerInventory;
 import pl.grzegorz2047.anarchy.AnarchyGuide;
 
-public class PlayerJoinListener implements Listener {
+public class PlayerJoin implements Listener {
 
 
     private final AnarchyGuide anarchyGuide;
 
-    public PlayerJoinListener(AnarchyGuide anarchyGuide) {
+    public PlayerJoin(AnarchyGuide anarchyGuide) {
         this.anarchyGuide = anarchyGuide;
     }
 

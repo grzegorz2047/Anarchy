@@ -1,5 +1,7 @@
 package pl.grzegorz2047.anarchy;
 
+import org.bukkit.Bukkit;
+import pl.grzegorz2047.anarchy.events.SecondEvent;
 import pl.grzegorz2047.api.AntiLogout;
 
 public class Watcher implements Runnable {
@@ -19,7 +21,7 @@ public class Watcher implements Runnable {
         }
 
         logout.update();
-
+        Bukkit.getPluginManager().callEvent(new SecondEvent());
     }
 
 }

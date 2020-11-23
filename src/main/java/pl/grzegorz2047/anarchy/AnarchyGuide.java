@@ -101,7 +101,7 @@ public class AnarchyGuide {
         int fadeIn = 10;
         int stay = 8 * 20;
         int fadeOut = 20;
-        player.sendTitle("Poleć gdzie chcesz...", "Przetrwaj!", fadeIn, stay, fadeOut);
+        player.sendTitle("Przetrwaj pod wodą...", "Licznik w scoreboradzie!", fadeIn, stay, fadeOut);
     }
 
     private void generateStartingSurface(Location startingLocation, int radius) {

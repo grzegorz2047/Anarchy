@@ -10,7 +10,7 @@ public class ActionBar {
 
     public static void sendActionBar(Player p, String message) {
         try {
-            p.spigot().sendMessage(ChatMessageType.ACTION_BAR, new TextComponent(message));
+            p.spigot().sendMessage(ChatMessageType.ACTION_BAR, new TextComponent(message +"\n elo"));
         } catch (Exception ex) {
             p.sendMessage(message);
         }
