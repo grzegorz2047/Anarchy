@@ -12,7 +12,6 @@ import org.bukkit.inventory.meta.PotionMeta;
 import org.bukkit.potion.PotionData;
 import org.bukkit.potion.PotionType;
 import pl.grzegorz2047.anarchy.events.SecondEvent;
-import pl.grzegorz2047.anarchy.scoreboard.ScoreboardSidebar;
 
 public class PlayerBreath implements Listener {
 
@@ -30,7 +29,7 @@ public class PlayerBreath implements Listener {
             Block block = player.getEyeLocation().getBlock();
             String name = player.getName();
 
-            playerBreathingManager.dealFishBreathing(player, block, name);
+            playerBreathingManager.playerBreath(player, block, name);
         });
     }
 

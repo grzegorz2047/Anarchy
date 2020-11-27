@@ -39,7 +39,7 @@ public class Anarchy extends JavaPlugin {
         AntiLogout antiLogout = new AntiLogout(messages);
         watcher = new Watcher(antiLogout);
         task = Bukkit.getScheduler().runTaskTimer(this, watcher, 0l, 20l);
-        registerEvents(antiLogout);
+        registerEvents(antiLogout, prop);
         getLogger().info("Anarchy was enabled!");
     }
 
@@ -48,8 +48,8 @@ public class Anarchy extends JavaPlugin {
     }
 
 
-    private void registerEvents(AntiLogout antiLogout) {
-        PlayerBreathingManager playerBreathingManager = new PlayerBreathingManager();
+    private void registerEvents(AntiLogout antiLogout, Properties prop) {
+        PlayerBreathingManager playerBreathingManager = new PlayerBreathingManager(prop);
 
         PluginManager pluginManager = Bukkit.getPluginManager();
         if (anarchyGuide.isForCrackersons()) {
@@ -62,7 +62,7 @@ public class Anarchy extends JavaPlugin {
         pluginManager.registerEvents(new PlayerPvpInteraction(anarchyGuide, antiLogout), this);
         pluginManager.registerEvents(new PlayerQuit(antiLogout), this);
         pluginManager.registerEvents(new SafeLogin(), this);
-        ;
+
         pluginManager.registerEvents(new PlayerBreath(playerBreathingManager), this);
         if (anarchyGuide.useAnarchyChatHandler()) {
             pluginManager.registerEvents(new PlayerChat(anarchyGuide), this);
@@ -92,6 +92,10 @@ public class Anarchy extends JavaPlugin {
     private void createProperties(String pluginFolderUrl, String propertyUrl, String filename) {
         try {
             Files.createDirectory(Paths.get(pluginFolderUrl));
+        } catch (IOException ex) {
+            ex.printStackTrace();
+        }
+        try {
             Files.copy(this.getResource(filename), Paths.get(propertyUrl), StandardCopyOption.REPLACE_EXISTING);
         } catch (IOException ex) {
             ex.printStackTrace();

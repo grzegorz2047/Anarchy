@@ -1,0 +1,5 @@
+- [X] enchant respiration na chełmie spowalnia uplyw tlenu na powierzchni(spowolnieni konfigurowalne)
+- [ ] po powrocie do wody, użytkownik odzyskuje tlen stopniowo (co 2-3 sekudny - konfigurowalne)
+- [ ] mozna ustawić natychmiastowe odzyskanie tlenu
+- [ ] konfigurowalna długość chodzenia po powierzchni bez tlenu
+- [ ] kiedy deszcz, wolniej traci tlen
